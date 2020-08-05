@@ -54,6 +54,7 @@
   {% if schedule %}
     <div class="alert alert-success mx-5" role="alert">
       View your custom workout schedule below!
+      <a href="{% url 'save_workout_to_csv' schedule%}" class="btn btn-primary">Download CSV</a>
     </div>
     {% for week in schedule %}
     <div class="card shadow mx-5 mb-1">
@@ -66,6 +67,7 @@
             <th scope="col">Day</th>
             <th scope="col">Workout</th>
             <th scope="col">Minutes</th>
+            <th scope="col">Categories</th>
             <th scope="col">Program</th>
           </tr>
         </thead>
@@ -75,6 +77,11 @@
             <th scope="row">Day {{ day|title }}</th>
             <td>{{ value }}</td>
             <td>{{ value.time }}</td>
+            <td>
+              {% for category in value.category.all %}
+                <span class="badge bg-info m-1 p-1">{{ category|title }}</span> <br>
+              {% endfor %}
+            </td>
             <td>{{ value.program }}</td>
           </tr>
           {% endfor %}

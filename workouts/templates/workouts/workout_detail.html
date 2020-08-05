@@ -1,20 +1,46 @@
 {% extends 'workouts/base.html' %}
 
 {% block content %}
+{% load static %}
 <div class="card m-5">
-  <div class="card-header">
-    <h1>{{ workout.name }}</h1>
+  <div class="card-header bg-success text-white">
+    <h1 class="display-6">{{ workout.name }}</h1>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Program: <b>{{ workout.program }}</b></li>
     <li class="list-group-item">Time: <b>{{ workout.time }} minutes</b></li>
     <li class="list-group-item"> Categories:
-      <ul>
-        {% for category in workout.category.all %}
-        <li><b>{{ category.category_name|title }}</b></li>
-        {% endfor %}
-      </ul>
+      {% for category in workout.category.all %}
+      <span class="badge bg-info m-1 p-2"><a class='text-decoration-none text-white' href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span>
+      {% endfor %}
     </li>
   </ul>
 </div>
-{% endblock %}
+<div>
+  <div class="alert alert-info mx-5" role="alert">
+    Related Workouts: <span class="badge bg-primary">{{ related_workouts|length }}</span>
+  </div>
+  {% if related_workouts %}
+  <div class="container">
+    <div class="row align-items-start">
+      {% for workout in related_workouts %}
+      <div class="col mb-4">
+        <div class="card" style="width: 22rem;">
+          <div class="card-header">
+            <a class='workout-links' href="{% url 'workout_detail' workout.id %}"><b>{{ workout.name }}</b></a>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Program: {{ workout.program }}</li>
+            <li class="list-group-item">Time: {{ workout.time }} minutes</li>
+            <li class="list-group-item"> Categories:
+              {% for category in workout.category.all %}
+              <span class="badge bg-info m-1 p-2"><a class='text-decoration-none text-white' href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span>
+              {% endfor %}
+            </li>
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    {% endblock %}
