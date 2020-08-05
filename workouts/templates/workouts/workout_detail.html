@@ -1,5 +1,20 @@
 {% extends 'workouts/base.html' %}
 
 {% block content %}
-<h1>{{ workout.name }}</h1>
+<div class="card m-5">
+  <div class="card-header">
+    <h1>{{ workout.name }}</h1>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Program: <b>{{ workout.program }}</b></li>
+    <li class="list-group-item">Time: <b>{{ workout.time }} minutes</b></li>
+    <li class="list-group-item"> Categories:
+      <ul>
+        {% for category in workout.category.all %}
+        <li><b>{{ category.category_name|title }}</b></li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+</div>
 {% endblock %}

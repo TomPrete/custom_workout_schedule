@@ -1,60 +1,87 @@
 {% extends 'workouts/base.html' %}
 
 {% block content %}
-<form method='POST'>
-  {% csrf_token %}
-  <div class='m-3'>
-    <h2>Create a Custom Workout Schedule</h2>
-    <p>Step 1: Select the Workout Programs you want to include in your Workout Schedule. (Please select at least 1)</p>
-  </div>
-  <div class="list-group m-3">
-    <div class="container">
-      <div class="row">
-        {% for program in programs %}
-        <div class="col-3">
-          <label class="list-group-item ">
-            <input class="form-check-input mr-1" name='programs' type="checkbox" value='{{ program.program }}'>
-            {{ program.program }}
-            <!-- <button type="button" class="btn btn-light btn-sm float-right">view workouts</button> -->
-          </label>
+  <form class='bg-light rounded shadow m-3 p-3' method='POST'>
+    {% csrf_token %}
+    <div class='m-3'>
+      <h2>Create a Custom Workout Schedule</h2>
+      <p>Step 1: Select the Workout Programs you want to include in your Workout Schedule. (Please select at least 1)</p>
+    </div>
+    {% if error %}
+    <div class="alert alert-danger m-3" role="alert">
+      {{ error }}
+    </div>
+    {% endif %}
+    <div class="list-group m-3">
+      <div class="d-flex container">
+        <div class="row">
+          {% for program in programs %}
+          <div class="col-3">
+            <label class="list-group-item ">
+              <input class="form-check-input mr-1" name='programs' type="checkbox" value='{{ program.program }}'>
+              {{ program.program }}
+            </label>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
     </div>
-  </div>
-  <div class='m-3'>
-    <p>Step 2: Select how many days you want to workout per week. (Default is 5)</p>
-  </div>
-  <div class="list-group m-6">
-    <div class="container">
-      <div class="row">
-        {% for day in week %}
-        <div class="col-2 ">
-          <label class="list-group-item ">
-            <input class="form-check-input mr-1" name='days' type="radio" value='{{ day }}'>
-            {{ day }} Days
-          </label>
+    <div class='m-3'>
+      <p>Step 2: Select how many days you want to workout per week.</p>
+    </div>
+    <div class="list-group m-6">
+      <div class="container">
+        <div class="row">
+          {% for day in week %}
+          <div class="col-2 ">
+            <label class="list-group-item ">
+              <input class="form-check-input mr-1" name='days' type="radio" value='{{ day }}' required>
+              {{ day }} Days
+            </label>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
     </div>
-  </div>
-  <div class='m-5'>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Create Workout Schedule</button>
-  </div>
-</form>
-{% if schedule %}
-  <div class="alert alert-success mx-5" role="alert">
-    Check out your custom Workout Schedule below!
-  </div>
-  {% for week in schedule %}
-  <h3>Week {{ forloop.counter }}</h3>
-      {% for day, value in week.items %}
-          <!-- <p>{{ week.day }}</p> -->
-          <p>Day {{ day|title }}: {{ value }} in {{ value.program }}</p>
-      {% endfor %}
-  {% endfor %}
-{% else %}
-  <h1>Your scheudle will show here</h1>
-{% endif %}
+    <div class='m-5'>
+      {% if schedule %}
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Success! - Click to create another workout schedule</button>
+      {% else %}
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Create Workout Schedule</button>
+      {% endif %}
+    </div>
+  </form>
+  {% if schedule %}
+    <div class="alert alert-success mx-5" role="alert">
+      View your custom workout schedule below!
+    </div>
+    {% for week in schedule %}
+    <div class="card shadow mx-5 mb-1">
+      <div class="card-header">
+        <h3>Week {{ forloop.counter }}</h3>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Workout</th>
+            <th scope="col">Minutes</th>
+            <th scope="col">Program</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for day, value in week.items %}
+          <tr>
+            <th scope="row">Day {{ day|title }}</th>
+            <td>{{ value }}</td>
+            <td>{{ value.time }}</td>
+            <td>{{ value.program }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endfor %}
+
+  {% endif %}
 {% endblock %}

@@ -7,6 +7,9 @@ def main_app(request):
   week = [3, 4, 5, 6, 7]
   if request.method == "POST":
     programs_selected = request.POST.getlist('programs')
+    if len(programs_selected) == 0:
+      error_message = 'Please select at least 1 workout program.'
+      return render(request, 'workouts/home.html', {'programs': programs, 'week': week, 'error': error_message})
     days = request.POST['days']
     program_workouts = _get_program_workouts(programs_selected)
     final_schedule = Schedule(program_workouts, days).assign_week_to_schedule()
@@ -37,6 +40,11 @@ def workout_detail(request, workout_id):
   workout = Workout.objects.get(id=workout_id)
   program_workouts = []
   return render(request, 'workouts/workout_detail.html', {'workout': workout})
+
+
+def all_workouts(request):
+  workouts = Workout.objects.all().order_by()
+  return render(request, 'workouts/all_workouts.html', {'all_workouts': workouts})
 
 
 def affiliate_page(request):
