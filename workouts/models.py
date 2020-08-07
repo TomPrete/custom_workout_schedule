@@ -50,4 +50,4 @@ class Message(models.Model):
     message = models.TextField(validators=[MaxLengthValidator(1000)])
 
     def __str__(self):
-        return f"Email: {email}, Message: {message}"
+        return f"Email: {self.email}, Message: {self.message}"
