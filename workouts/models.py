@@ -48,3 +48,6 @@ class ScheduleDetail(models.Model):
 class Message(models.Model):
     email = models.EmailField(max_length=100)
     message = models.TextField(validators=[MaxLengthValidator(1000)])
+
+    def __str__(self):
+        return f"Email: {email}, Message: {message}"
