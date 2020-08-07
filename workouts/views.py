@@ -65,7 +65,7 @@ def all_programs(request):
   return render(request, 'workouts/programs_table.html', {'program_workouts': program_workouts})
 
 def all_workouts(request):
-  workouts = Workout.objects.all().order_by()
+  workouts = Workout.objects.all().order_by('program')
   return render(request, 'workouts/all_workouts.html', {'all_workouts': workouts})
 
 def all_categories(request):
