@@ -1,0 +1,2128 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.5
+-- Dumped by pg_dump version 11.5
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO taprete;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO taprete;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO taprete;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO taprete;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO taprete;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO taprete;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO taprete;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO taprete;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO taprete;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO taprete;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO taprete;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO taprete;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO taprete;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO taprete;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO taprete;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO taprete;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO taprete;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO taprete;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO taprete;
+
+--
+-- Name: workouts_category; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_category (
+    id integer NOT NULL,
+    category_name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.workouts_category OWNER TO taprete;
+
+--
+-- Name: workouts_category_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_category_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_category_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_category_id_seq OWNED BY public.workouts_category.id;
+
+
+--
+-- Name: workouts_category_workouts; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_category_workouts (
+    id integer NOT NULL,
+    category_id integer NOT NULL,
+    workout_id integer NOT NULL
+);
+
+
+ALTER TABLE public.workouts_category_workouts OWNER TO taprete;
+
+--
+-- Name: workouts_category_workouts_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_category_workouts_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_category_workouts_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_category_workouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_category_workouts_id_seq OWNED BY public.workouts_category_workouts.id;
+
+
+--
+-- Name: workouts_musclegroup; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_musclegroup (
+    id integer NOT NULL,
+    "group" character varying(20)
+);
+
+
+ALTER TABLE public.workouts_musclegroup OWNER TO taprete;
+
+--
+-- Name: workouts_musclegroup_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_musclegroup_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_musclegroup_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_musclegroup_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_musclegroup_id_seq OWNED BY public.workouts_musclegroup.id;
+
+
+--
+-- Name: workouts_musclegroup_workouts; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_musclegroup_workouts (
+    id integer NOT NULL,
+    musclegroup_id integer NOT NULL,
+    workout_id integer NOT NULL
+);
+
+
+ALTER TABLE public.workouts_musclegroup_workouts OWNER TO taprete;
+
+--
+-- Name: workouts_musclegroup_workouts_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_musclegroup_workouts_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_musclegroup_workouts_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_musclegroup_workouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_musclegroup_workouts_id_seq OWNED BY public.workouts_musclegroup_workouts.id;
+
+
+--
+-- Name: workouts_program; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_program (
+    id integer NOT NULL,
+    program character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.workouts_program OWNER TO taprete;
+
+--
+-- Name: workouts_program_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_program_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_program_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_program_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_program_id_seq OWNED BY public.workouts_program.id;
+
+
+--
+-- Name: workouts_type; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_type (
+    id integer NOT NULL,
+    type character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.workouts_type OWNER TO taprete;
+
+--
+-- Name: workouts_type_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_type_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_type_id_seq OWNED BY public.workouts_type.id;
+
+
+--
+-- Name: workouts_type_workouts; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_type_workouts (
+    id integer NOT NULL,
+    type_id integer NOT NULL,
+    workout_id integer NOT NULL
+);
+
+
+ALTER TABLE public.workouts_type_workouts OWNER TO taprete;
+
+--
+-- Name: workouts_type_workouts_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_type_workouts_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_type_workouts_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_type_workouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_type_workouts_id_seq OWNED BY public.workouts_type_workouts.id;
+
+
+--
+-- Name: workouts_workout; Type: TABLE; Schema: public; Owner: taprete
+--
+
+CREATE TABLE public.workouts_workout (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    program_id integer NOT NULL,
+    "time" integer NOT NULL
+);
+
+
+ALTER TABLE public.workouts_workout OWNER TO taprete;
+
+--
+-- Name: workouts_workout_id_seq; Type: SEQUENCE; Schema: public; Owner: taprete
+--
+
+CREATE SEQUENCE public.workouts_workout_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workouts_workout_id_seq OWNER TO taprete;
+
+--
+-- Name: workouts_workout_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taprete
+--
+
+ALTER SEQUENCE public.workouts_workout_id_seq OWNED BY public.workouts_workout.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: workouts_category id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_category ALTER COLUMN id SET DEFAULT nextval('public.workouts_category_id_seq'::regclass);
+
+
+--
+-- Name: workouts_category_workouts id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_category_workouts ALTER COLUMN id SET DEFAULT nextval('public.workouts_category_workouts_id_seq'::regclass);
+
+
+--
+-- Name: workouts_musclegroup id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_musclegroup ALTER COLUMN id SET DEFAULT nextval('public.workouts_musclegroup_id_seq'::regclass);
+
+
+--
+-- Name: workouts_musclegroup_workouts id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_musclegroup_workouts ALTER COLUMN id SET DEFAULT nextval('public.workouts_musclegroup_workouts_id_seq'::regclass);
+
+
+--
+-- Name: workouts_program id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_program ALTER COLUMN id SET DEFAULT nextval('public.workouts_program_id_seq'::regclass);
+
+
+--
+-- Name: workouts_type id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_type ALTER COLUMN id SET DEFAULT nextval('public.workouts_type_id_seq'::regclass);
+
+
+--
+-- Name: workouts_type_workouts id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_type_workouts ALTER COLUMN id SET DEFAULT nextval('public.workouts_type_workouts_id_seq'::regclass);
+
+
+--
+-- Name: workouts_workout id; Type: DEFAULT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_workout ALTER COLUMN id SET DEFAULT nextval('public.workouts_workout_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add program	7	add_program
+26	Can change program	7	change_program
+27	Can delete program	7	delete_program
+28	Can view program	7	view_program
+29	Can add workout	8	add_workout
+30	Can change workout	8	change_workout
+31	Can delete workout	8	delete_workout
+32	Can view workout	8	view_workout
+33	Can add type	9	add_type
+34	Can change type	9	change_type
+35	Can delete type	9	delete_type
+36	Can view type	9	view_type
+37	Can add muscle group	10	add_musclegroup
+38	Can change muscle group	10	change_musclegroup
+39	Can delete muscle group	10	delete_musclegroup
+40	Can view muscle group	10	view_musclegroup
+41	Can add category	11	add_category
+42	Can change category	11	change_category
+43	Can delete category	11	delete_category
+44	Can view category	11	view_category
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$180000$Zmrpqx8zOLd0$Z+Jea/3TbyunqQvL6IshtxgpRR/XF2GyUPMJrV83xJA=	2020-08-02 07:26:54.487823-05	t	taprete			tom@email.com	t	t	2020-08-02 07:26:36.481451-05
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2020-08-02 07:32:29.662294-05	1	Program object (1)	1	[{"added": {}}]	7	1
+2	2020-08-02 07:32:36.968603-05	2	Program object (2)	1	[{"added": {}}]	7	1
+3	2020-08-02 07:32:44.417874-05	3	Program object (3)	1	[{"added": {}}]	7	1
+4	2020-08-02 07:33:14.882108-05	4	Program object (4)	1	[{"added": {}}]	7	1
+5	2020-08-02 07:36:15.557372-05	1	Chest & Back	1	[{"added": {}}]	8	1
+6	2020-08-02 07:36:26.53159-05	2	Plyometrics	1	[{"added": {}}]	8	1
+7	2020-08-02 07:36:59.20939-05	3	Shoulders & Arms	1	[{"added": {}}]	8	1
+8	2020-08-02 07:37:10.501871-05	4	Yoga X	1	[{"added": {}}]	8	1
+9	2020-08-02 07:37:24.991399-05	5	Legs & Back	1	[{"added": {}}]	8	1
+10	2020-08-02 07:39:59.35476-05	6	Kenpo X	1	[{"added": {}}]	8	1
+11	2020-08-02 07:40:10.215996-05	7	X Stretch	1	[{"added": {}}]	8	1
+12	2020-08-02 07:40:24.795676-05	8	Core Synergistics	1	[{"added": {}}]	8	1
+13	2020-08-02 07:40:40.105258-05	9	Chest, Shoulders & Triceps	1	[{"added": {}}]	8	1
+14	2020-08-02 07:40:50.889233-05	10	Back & Biceps	1	[{"added": {}}]	8	1
+15	2020-08-02 07:41:02.179812-05	11	Cardio X	1	[{"added": {}}]	8	1
+16	2020-08-02 07:41:11.161152-05	12	Ab Ripper X	1	[{"added": {}}]	8	1
+17	2020-08-02 07:41:54.22758-05	13	X2 Core	1	[{"added": {}}]	8	1
+18	2020-08-02 07:42:12.545791-05	14	Plyocide	1	[{"added": {}}]	8	1
+19	2020-08-02 07:42:31.688241-05	15	X2 Recovery + Mobility	1	[{"added": {}}]	8	1
+20	2020-08-02 07:42:41.849099-05	16	X2 Total Body	1	[{"added": {}}]	8	1
+21	2020-08-02 07:42:51.530541-05	17	X2 Yoga	1	[{"added": {}}]	8	1
+22	2020-08-02 07:43:06.488004-05	18	X2 Balance + Power	1	[{"added": {}}]	8	1
+23	2020-08-02 07:43:21.543503-05	19	Chest + Back + Balance	1	[{"added": {}}]	8	1
+24	2020-08-02 07:43:35.381235-05	20	X2 Shoulders + Arms	1	[{"added": {}}]	8	1
+25	2020-08-02 07:43:44.451172-05	21	Base + Back	1	[{"added": {}}]	8	1
+26	2020-08-02 07:43:56.596602-05	22	P.A.P. Lower	1	[{"added": {}}]	8	1
+27	2020-08-02 07:44:08.708209-05	23	P.A.P. Upper	1	[{"added": {}}]	8	1
+28	2020-08-02 07:44:17.859547-05	24	X2 Ab Ripper	1	[{"added": {}}]	8	1
+29	2020-08-02 07:44:28.261293-05	25	V Sculpt	1	[{"added": {}}]	8	1
+30	2020-08-02 07:44:47.512592-05	26	X2 Chest + Shoulders + Tris	1	[{"added": {}}]	8	1
+31	2020-08-02 07:45:42.808706-05	27	Total Synergistics	1	[{"added": {}}]	8	1
+32	2020-08-02 07:45:53.521544-05	28	The Challenge	1	[{"added": {}}]	8	1
+33	2020-08-02 07:46:02.225608-05	29	Incinerator	1	[{"added": {}}]	8	1
+34	2020-08-02 07:46:12.004702-05	30	Eccentric Upper	1	[{"added": {}}]	8	1
+35	2020-08-02 07:46:19.507658-05	31	Eccentric Lower	1	[{"added": {}}]	8	1
+36	2020-08-02 07:46:27.098783-05	32	The Warrior	1	[{"added": {}}]	8	1
+37	2020-08-02 07:46:35.822519-05	33	Agility X	1	[{"added": {}}]	8	1
+38	2020-08-02 07:46:49.598048-05	34	Triometrics	1	[{"added": {}}]	8	1
+39	2020-08-02 07:47:00.58847-05	35	Decelerator	1	[{"added": {}}]	8	1
+40	2020-08-02 07:47:06.848195-05	36	CVX	1	[{"added": {}}]	8	1
+41	2020-08-02 07:47:15.869057-05	37	MMX	1	[{"added": {}}]	8	1
+42	2020-08-02 07:47:25.038394-05	38	Accelerator	1	[{"added": {}}]	8	1
+43	2020-08-02 07:47:35.43806-05	39	X3 Yoga	1	[{"added": {}}]	8	1
+44	2020-08-02 07:47:48.319892-05	40	Pilates X	1	[{"added": {}}]	8	1
+45	2020-08-02 07:47:59.391689-05	41	Isometrix	1	[{"added": {}}]	8	1
+46	2020-08-02 07:48:07.341806-05	42	Dynamix	1	[{"added": {}}]	8	1
+47	2020-08-02 07:48:17.298278-05	43	Complex Upper	1	[{"added": {}}]	8	1
+48	2020-08-02 07:48:30.578795-05	44	Complex Lower	1	[{"added": {}}]	8	1
+49	2020-08-02 07:48:41.396582-05	45	X3 Ab Ripper	1	[{"added": {}}]	8	1
+50	2020-08-02 07:49:23.202926-05	46	Sculpt A	1	[{"added": {}}]	8	1
+51	2020-08-02 07:49:31.35574-05	47	Sweat A	1	[{"added": {}}]	8	1
+52	2020-08-02 07:51:23.720067-05	48	Ab Ripper A	1	[{"added": {}}]	8	1
+53	2020-08-02 07:51:42.750382-05	49	Sculpt B	1	[{"added": {}}]	8	1
+54	2020-08-02 07:51:53.059151-05	50	Sweat B	1	[{"added": {}}]	8	1
+55	2020-08-02 07:52:08.829254-05	51	Ab Ripper B	1	[{"added": {}}]	8	1
+56	2020-08-02 07:52:20.289908-05	52	Sculpt C	1	[{"added": {}}]	8	1
+57	2020-08-02 07:52:30.003678-05	53	Sweat C	1	[{"added": {}}]	8	1
+58	2020-08-02 07:52:40.256658-05	54	Ab Ripper C	1	[{"added": {}}]	8	1
+59	2020-08-02 07:52:52.507431-05	55	Saturday Special	1	[{"added": {}}]	8	1
+60	2020-08-02 07:56:08.552529-05	5	P90X Plus	1	[{"added": {}}]	7	1
+61	2020-08-02 07:58:24.589822-05	56	Interval X	1	[{"added": {}}]	8	1
+62	2020-08-02 07:58:43.493362-05	57	Kenpo X	1	[{"added": {}}]	8	1
+63	2020-08-02 07:58:55.992724-05	58	Upper Body Plus	1	[{"added": {}}]	8	1
+64	2020-08-02 07:59:17.759926-05	59	Total Body Plus	1	[{"added": {}}]	8	1
+65	2020-08-02 07:59:33.14038-05	60	Abs/Core	1	[{"added": {}}]	8	1
+66	2020-08-02 08:12:20.052071-05	1	chest	1	[{"added": {}}]	10	1
+67	2020-08-02 08:14:55.02386-05	1	total body	1	[{"added": {}}]	11	1
+68	2020-08-02 08:18:07.437647-05	2	cardio	1	[{"added": {}}]	11	1
+69	2020-08-02 08:21:09.813114-05	3	upper body	1	[{"added": {}}]	11	1
+70	2020-08-02 08:22:34.969763-05	4	lower body	1	[{"added": {}}]	11	1
+71	2020-08-02 08:23:51.822492-05	5	plyo	1	[{"added": {}}]	11	1
+72	2020-08-02 08:24:30.58143-05	6	yoga	1	[{"added": {}}]	11	1
+73	2020-08-02 08:26:37.91997-05	7	abs/core	1	[{"added": {}}]	11	1
+74	2020-08-02 08:27:19.788514-05	8	dynamic stretching	1	[{"added": {}}]	11	1
+75	2020-08-02 08:27:53.915157-05	9	static stretching	1	[{"added": {}}]	11	1
+76	2020-08-02 08:28:41.016952-05	60	Abs/Core Plus	2	[{"changed": {"fields": ["Name"]}}]	8	1
+77	2020-08-02 08:30:13.259227-05	6	Body Beast	1	[{"added": {}}]	7	1
+78	2020-08-02 08:30:53.754046-05	7	22 Minute Hard Corps	1	[{"added": {}}]	7	1
+79	2020-08-02 08:32:35.749585-05	8	Insanity	1	[{"added": {}}]	7	1
+80	2020-08-02 08:32:49.40358-05	9	Insanity Asylum	1	[{"added": {}}]	7	1
+81	2020-08-02 08:33:31.32395-05	10	Focus T25	1	[{"added": {}}]	7	1
+82	2020-08-02 08:34:22.674092-05	61	Build Legs	1	[{"added": {}}]	8	1
+83	2020-08-02 08:34:43.946407-05	62	Build Chest/Tris	1	[{"added": {}}]	8	1
+84	2020-08-02 08:34:56.044511-05	63	Build Back/Bis	1	[{"added": {}}]	8	1
+85	2020-08-02 08:35:09.7608-05	64	Build Shoulders	1	[{"added": {}}]	8	1
+86	2020-08-02 08:35:19.952136-05	65	Bulk Legs	1	[{"added": {}}]	8	1
+87	2020-08-02 08:35:31.737556-05	66	Bulk Arms	1	[{"added": {}}]	8	1
+88	2020-08-02 08:35:41.802853-05	67	Bulk Chest	1	[{"added": {}}]	8	1
+89	2020-08-02 08:35:51.500735-05	68	Bulk Back	1	[{"added": {}}]	8	1
+90	2020-08-02 08:36:05.867594-05	69	Bulk Shoulders	1	[{"added": {}}]	8	1
+91	2020-08-02 08:36:15.228166-05	70	Beast Abs	1	[{"added": {}}]	8	1
+92	2020-08-02 08:36:25.146641-05	71	Beast Cardio	1	[{"added": {}}]	8	1
+93	2020-08-02 08:36:37.329034-05	72	Beast Total Body	1	[{"added": {}}]	8	1
+94	2020-08-02 08:37:10.348375-05	73	Dig Deeper & Fit Test	1	[{"added": {}}]	8	1
+95	2020-08-02 08:37:33.49048-05	74	Plyometric Cardio Circuit	1	[{"added": {}}]	8	1
+96	2020-08-02 08:37:45.882289-05	75	Cardio Power & Resistance	1	[{"added": {}}]	8	1
+97	2020-08-02 08:38:10.606323-05	76	Cardio Recovery	1	[{"added": {}}]	8	1
+98	2020-08-02 08:38:23.37896-05	77	Pure Cardio & Cardio Abs	1	[{"added": {}}]	8	1
+99	2020-08-02 08:38:40.123145-05	78	Max Interval Circuit	1	[{"added": {}}]	8	1
+100	2020-08-02 08:38:52.770615-05	79	Max Interval Plyo	1	[{"added": {}}]	8	1
+101	2020-08-02 08:39:17.986279-05	80	Max Cardio Conditioning & Cardio Abs	1	[{"added": {}}]	8	1
+102	2020-08-02 08:39:27.833395-05	81	Max Recovery	1	[{"added": {}}]	8	1
+103	2020-08-02 08:39:52.561002-05	82	Fast & Furious	1	[{"added": {}}]	8	1
+104	2020-08-02 08:42:17.023428-05	9	Insanity Asylum Vol. 1	2	[{"changed": {"fields": ["Program"]}}]	7	1
+105	2020-08-02 08:42:20.858294-05	11	Insanity Asylum Vol. 2	1	[{"added": {}}]	7	1
+106	2020-08-02 08:42:38.850501-05	83	Speed & Agility	1	[{"added": {}}]	8	1
+107	2020-08-02 08:42:50.056278-05	84	Vertical Plyo	1	[{"added": {}}]	8	1
+108	2020-08-02 08:43:06.780812-05	85	Relief	1	[{"added": {}}]	8	1
+109	2020-08-02 08:43:14.904708-05	86	Strength	1	[{"added": {}}]	8	1
+110	2020-08-02 08:43:24.076003-05	87	Game Day	1	[{"added": {}}]	8	1
+111	2020-08-02 08:43:33.048427-05	88	Overtime	1	[{"added": {}}]	8	1
+112	2020-08-02 08:43:46.845195-05	89	Back to Core	1	[{"added": {}}]	8	1
+113	2020-08-02 08:44:16.937147-05	90	Sports Performance Assessment	1	[{"added": {}}]	8	1
+114	2020-08-02 08:44:40.458806-05	91	X Trainer	1	[{"added": {}}]	8	1
+115	2020-08-02 08:44:50.92039-05	92	Upper Elite	1	[{"added": {}}]	8	1
+116	2020-08-02 08:45:03.280869-05	93	Ab Shredder	1	[{"added": {}}]	8	1
+117	2020-08-02 08:45:18.939949-05	94	Power Legs	1	[{"added": {}}]	8	1
+118	2020-08-02 08:45:29.811769-05	95	Back & 6 Pack	1	[{"added": {}}]	8	1
+119	2020-08-02 08:45:48.204493-05	96	Championship + Fit Test	1	[{"added": {}}]	8	1
+120	2020-08-02 08:46:01.090995-05	97	Off Day Stretch	1	[{"added": {}}]	8	1
+121	2020-08-02 08:46:17.193976-05	98	Agility Tutorial	1	[{"added": {}}]	8	1
+122	2020-08-02 08:46:27.954436-05	99	Pure Contact	1	[{"added": {}}]	8	1
+123	2020-08-02 08:47:26.545954-05	100	Cold Start	1	[{"added": {}}]	8	1
+124	2020-08-02 08:47:34.81658-05	101	Cardio 1	1	[{"added": {}}]	8	1
+125	2020-08-02 08:47:41.03007-05	102	Cardio 2	1	[{"added": {}}]	8	1
+126	2020-08-02 08:47:52.351193-05	103	Cardio 3	1	[{"added": {}}]	8	1
+127	2020-08-02 08:47:58.070864-05	104	Core 1	1	[{"added": {}}]	8	1
+128	2020-08-02 08:48:04.167389-05	105	Core 2	1	[{"added": {}}]	8	1
+129	2020-08-02 08:48:15.047076-05	106	Resistance 1	1	[{"added": {}}]	8	1
+130	2020-08-02 08:48:21.694377-05	107	Resistance 2	1	[{"added": {}}]	8	1
+131	2020-08-02 08:48:30.630714-05	108	Resistance 3	1	[{"added": {}}]	8	1
+132	2020-08-02 08:48:52.48295-05	109	Battle Buddy	1	[{"added": {}}]	8	1
+133	2020-08-02 08:51:45.727637-05	110	Cardio (Alpha)	1	[{"added": {}}]	8	1
+134	2020-08-02 08:51:56.750766-05	111	Speed 1.0 (Alpha)	1	[{"added": {}}]	8	1
+135	2020-08-02 08:52:09.476185-05	112	Total Body Circuit (Alpha)	1	[{"added": {}}]	8	1
+136	2020-08-02 08:52:22.262067-05	113	Ab Intervals (Alpha)	1	[{"added": {}}]	8	1
+137	2020-08-02 08:52:32.55089-05	114	Lower Focus (Alpha)	1	[{"added": {}}]	8	1
+138	2020-08-02 08:52:45.061511-05	115	Core Cardio (Beta)	1	[{"added": {}}]	8	1
+139	2020-08-02 08:52:54.598582-05	116	Speed 2.0 (Beta)	1	[{"added": {}}]	8	1
+140	2020-08-02 08:53:10.0425-05	117	Rip't Circuit (Beta)	1	[{"added": {}}]	8	1
+141	2020-08-02 08:53:29.884071-05	118	Dynamic Core (Beta)	1	[{"added": {}}]	8	1
+142	2020-08-02 08:53:57.322096-05	119	Upper Focus (Beta)	1	[{"added": {}}]	8	1
+143	2020-08-02 08:54:12.297892-05	120	Rip't Up (Gamma)	1	[{"added": {}}]	8	1
+144	2020-08-02 08:54:26.337013-05	121	Extreme Circuit (Gamma)	1	[{"added": {}}]	8	1
+145	2020-08-02 08:54:43.385327-05	122	The Pyramid (Gamma)	1	[{"added": {}}]	8	1
+146	2020-08-02 08:54:54.985035-05	123	Speed 3.0	1	[{"added": {}}]	8	1
+147	2020-08-02 08:55:07.225364-05	124	Core Speed	1	[{"added": {}}]	8	1
+148	2020-08-02 08:55:34.515569-05	9	Insanity Asylum	2	[{"changed": {"fields": ["Program"]}}]	7	1
+149	2020-08-02 08:55:53.941263-05	11	Insanity Asylum (Volume 2)	2	[{"changed": {"fields": ["Program"]}}]	7	1
+150	2020-08-02 08:57:28.763635-05	1	resistance	1	[{"added": {}}]	9	1
+151	2020-08-02 08:57:54.886903-05	2	conditioning	1	[{"added": {}}]	9	1
+152	2020-08-02 08:58:02.67567-05	3	mobility	1	[{"added": {}}]	9	1
+153	2020-08-03 16:38:47.608005-05	4	lower body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+154	2020-08-04 08:19:22.988987-05	3	upper body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+155	2020-08-04 08:24:53.734336-05	2	cardio	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+156	2020-08-05 14:03:24.216609-05	3	upper body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+157	2020-08-06 15:05:30.155558-05	7	abs/core	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+158	2020-08-06 15:10:27.514498-05	2	cardio	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+159	2020-08-06 15:12:14.319928-05	4	lower body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+160	2020-08-06 15:15:26.124903-05	1	total body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+161	2020-08-06 15:18:04.576623-05	5	plyo	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+162	2020-08-06 15:19:53.424683-05	3	upper body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+163	2020-08-06 15:21:17.852324-05	9	static stretching	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+164	2020-08-06 15:22:23.382927-05	4	lower body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+165	2020-08-06 15:22:31.843846-05	2	cardio	2	[]	11	1
+166	2020-08-06 15:26:29.90369-05	8	dynamic stretching	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+167	2020-08-06 15:27:20.044621-05	10	warmup	1	[{"added": {}}]	11	1
+168	2020-08-06 15:28:23.266115-05	3	upper body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+169	2020-08-06 15:28:43.963536-05	3	upper body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+170	2020-08-06 15:35:53.774714-05	12	Tapout XT	1	[{"added": {}}]	7	1
+171	2020-08-06 15:38:29.997163-05	125	Buns & Guns in Tapout XT	1	[{"added": {}}]	8	1
+172	2020-08-06 15:38:45.017979-05	126	Strength & Force in Tapout XT	1	[{"added": {}}]	8	1
+173	2020-08-06 15:38:56.557774-05	127	Plyo in Tapout XT	1	[{"added": {}}]	8	1
+174	2020-08-06 15:39:13.538433-05	128	Cross Core Combat in Tapout XT	1	[{"added": {}}]	8	1
+175	2020-08-06 15:40:33.06859-05	129	Competition Core in Tapout XT	1	[{"added": {}}]	8	1
+176	2020-08-06 15:40:46.431418-05	130	Yoga in Tapout XT	1	[{"added": {}}]	8	1
+177	2020-08-06 15:41:03.263494-05	131	Sprawl & Brawl in Tapout XT	1	[{"added": {}}]	8	1
+178	2020-08-06 15:41:18.944204-05	132	Muay Thai in Tapout XT	1	[{"added": {}}]	8	1
+179	2020-08-06 15:41:34.394147-05	133	Ripped Conditioning in Tapout XT	1	[{"added": {}}]	8	1
+180	2020-08-06 15:41:45.315283-05	134	Ultimate Abs in Tapout XT	1	[{"added": {}}]	8	1
+181	2020-08-06 15:41:53.544503-05	135	Cardio in Tapout XT	1	[{"added": {}}]	8	1
+182	2020-08-06 15:42:07.100561-05	136	Legs & Back in Tapout XT	1	[{"added": {}}]	8	1
+183	2020-08-06 15:46:39.160098-05	1	total body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+184	2020-08-06 15:47:00.767156-05	3	upper body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+185	2020-08-06 15:47:16.588209-05	5	plyo	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+186	2020-08-06 15:47:40.966385-05	2	cardio	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+187	2020-08-06 15:47:59.604471-05	7	abs/core	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+188	2020-08-06 15:48:11.562659-05	6	yoga	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+189	2020-08-06 15:48:23.738315-05	4	lower body	2	[{"changed": {"fields": ["Workouts"]}}]	11	1
+190	2020-08-06 16:02:15.995261-05	136	Legs & Back XT in Tapout XT	2	[{"changed": {"fields": ["Name"]}}]	8	1
+191	2020-08-06 16:02:21.169714-05	135	Cardio XT in Tapout XT	2	[{"changed": {"fields": ["Name"]}}]	8	1
+192	2020-08-06 16:43:04.734125-05	11	Insanity Asylum (Vol. 2)	2	[{"changed": {"fields": ["Program"]}}]	7	1
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	workouts	program
+8	workouts	workout
+9	workouts	type
+10	workouts	musclegroup
+11	workouts	category
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2020-08-02 07:15:44.372818-05
+2	auth	0001_initial	2020-08-02 07:15:44.418705-05
+3	admin	0001_initial	2020-08-02 07:15:44.448345-05
+4	admin	0002_logentry_remove_auto_add	2020-08-02 07:15:44.460249-05
+5	admin	0003_logentry_add_action_flag_choices	2020-08-02 07:15:44.468333-05
+6	contenttypes	0002_remove_content_type_name	2020-08-02 07:15:44.485089-05
+7	auth	0002_alter_permission_name_max_length	2020-08-02 07:15:44.489736-05
+8	auth	0003_alter_user_email_max_length	2020-08-02 07:15:44.500675-05
+9	auth	0004_alter_user_username_opts	2020-08-02 07:15:44.51285-05
+10	auth	0005_alter_user_last_login_null	2020-08-02 07:15:44.527327-05
+11	auth	0006_require_contenttypes_0002	2020-08-02 07:15:44.528987-05
+12	auth	0007_alter_validators_add_error_messages	2020-08-02 07:15:44.538374-05
+13	auth	0008_alter_user_username_max_length	2020-08-02 07:15:44.550376-05
+14	auth	0009_alter_user_last_name_max_length	2020-08-02 07:15:44.563551-05
+15	auth	0010_alter_group_name_max_length	2020-08-02 07:15:44.571659-05
+16	auth	0011_update_proxy_permissions	2020-08-02 07:15:44.578155-05
+17	sessions	0001_initial	2020-08-02 07:15:44.584545-05
+18	workouts	0001_initial	2020-08-02 07:15:44.622214-05
+19	workouts	0002_auto_20200802_1230	2020-08-02 07:31:41.418246-05
+20	workouts	0003_auto_20200802_1305	2020-08-02 08:05:35.695229-05
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+4778ftcvc5vnu1mcvx8w2qt2eianzmvp	OWVkYTRlZDlkOTdhYTQzMGYwMDNmYzE2Zjc4OTAzMWRjNDk1MTIxMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYTIyODdmMmQ2ODdjZWMxMDg4NTEyMmNmNDJlZmMyZGUxMWFhZmZmIn0=	2020-08-16 07:26:54.489629-05
+\.
+
+
+--
+-- Data for Name: workouts_category; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_category (id, category_name) FROM stdin;
+9	static stretching
+8	dynamic stretching
+10	warmup
+1	total body
+3	upper body
+5	plyo
+2	cardio
+7	abs/core
+6	yoga
+4	lower body
+\.
+
+
+--
+-- Data for Name: workouts_category_workouts; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_category_workouts (id, category_id, workout_id) FROM stdin;
+1	1	32
+2	1	35
+3	1	8
+4	1	59
+5	1	13
+6	1	16
+7	1	18
+8	1	27
+9	2	32
+10	2	35
+11	2	36
+12	2	37
+13	2	6
+14	2	38
+15	2	11
+18	2	56
+19	2	57
+20	2	27
+21	3	1
+22	3	3
+23	3	58
+25	3	9
+26	3	10
+27	3	43
+28	3	19
+29	3	20
+30	3	21
+31	3	23
+32	3	25
+33	3	26
+34	3	28
+35	3	29
+36	3	30
+37	4	34
+38	4	5
+39	4	44
+40	4	21
+41	4	22
+42	4	31
+43	5	33
+44	5	2
+45	5	34
+46	5	14
+47	6	17
+48	6	4
+49	6	41
+50	6	39
+51	7	40
+52	7	41
+53	7	12
+54	7	13
+55	7	45
+56	7	48
+57	7	51
+58	7	54
+59	7	24
+60	7	60
+61	8	40
+62	8	42
+63	9	15
+64	9	7
+65	4	65
+66	4	114
+67	4	61
+68	4	94
+69	3	5
+70	7	70
+71	7	104
+72	7	105
+73	7	77
+74	7	80
+75	7	113
+76	7	118
+77	7	89
+78	7	124
+79	7	93
+80	7	95
+81	2	47
+82	2	50
+83	2	53
+84	2	55
+85	2	71
+86	2	77
+87	2	78
+88	2	80
+89	2	82
+90	2	83
+91	2	87
+92	2	88
+93	2	90
+94	2	96
+95	2	98
+96	2	101
+97	2	102
+98	2	103
+99	2	110
+100	2	111
+101	2	115
+102	2	116
+103	2	121
+104	2	122
+105	2	123
+106	4	73
+107	1	99
+108	1	72
+109	1	106
+110	1	75
+111	1	107
+112	1	108
+113	1	46
+114	1	109
+115	1	112
+116	1	49
+117	1	52
+118	1	117
+119	1	86
+120	1	87
+121	1	88
+122	1	121
+123	1	91
+124	5	74
+125	5	84
+126	5	79
+127	3	64
+128	3	66
+129	3	67
+130	3	68
+131	3	69
+132	3	92
+133	3	62
+134	3	63
+135	9	81
+136	9	85
+137	9	97
+138	4	123
+139	4	116
+140	4	111
+141	8	76
+142	10	100
+143	3	120
+144	3	119
+145	1	125
+146	1	133
+147	3	136
+148	3	126
+149	5	127
+150	2	128
+151	2	131
+152	2	132
+153	2	133
+154	2	135
+155	7	128
+156	7	129
+157	7	134
+158	6	130
+159	4	136
+\.
+
+
+--
+-- Data for Name: workouts_musclegroup; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_musclegroup (id, "group") FROM stdin;
+1	chest
+\.
+
+
+--
+-- Data for Name: workouts_musclegroup_workouts; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_musclegroup_workouts (id, musclegroup_id, workout_id) FROM stdin;
+1	1	32
+2	1	1
+3	1	35
+4	1	58
+5	1	8
+6	1	9
+7	1	59
+8	1	43
+9	1	13
+10	1	16
+11	1	18
+12	1	19
+13	1	23
+14	1	26
+15	1	27
+16	1	28
+17	1	29
+18	1	30
+\.
+
+
+--
+-- Data for Name: workouts_program; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_program (id, program) FROM stdin;
+1	P90X
+2	P90X2
+3	P90X3
+4	P90
+5	P90X Plus
+6	Body Beast
+7	22 Minute Hard Corps
+8	Insanity
+10	Focus T25
+9	Insanity Asylum
+12	Tapout XT
+11	Insanity Asylum (Vol. 2)
+\.
+
+
+--
+-- Data for Name: workouts_type; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_type (id, type) FROM stdin;
+1	resistance
+2	conditioning
+3	mobility
+\.
+
+
+--
+-- Data for Name: workouts_type_workouts; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_type_workouts (id, type_id, workout_id) FROM stdin;
+1	1	1
+2	2	11
+3	3	4
+\.
+
+
+--
+-- Data for Name: workouts_workout; Type: TABLE DATA; Schema: public; Owner: taprete
+--
+
+COPY public.workouts_workout (id, name, program_id, "time") FROM stdin;
+1	Chest & Back	1	53
+2	Plyometrics	1	58
+3	Shoulders & Arms	1	60
+4	Yoga X	1	92
+5	Legs & Back	1	59
+6	Kenpo X	1	59
+7	X Stretch	1	57
+8	Core Synergistics	1	57
+9	Chest, Shoulders & Triceps	1	56
+10	Back & Biceps	1	51
+11	Cardio X	1	43
+12	Ab Ripper X	1	16
+13	X2 Core	2	57
+14	Plyocide	2	57
+15	X2 Recovery + Mobility	2	58
+16	X2 Total Body	2	64
+17	X2 Yoga	2	68
+18	X2 Balance + Power	2	63
+19	Chest + Back + Balance	2	60
+20	X2 Shoulders + Arms	2	53
+21	Base + Back	2	56
+22	P.A.P. Lower	2	63
+23	P.A.P. Upper	2	54
+24	X2 Ab Ripper	2	17
+25	V Sculpt	2	54
+26	X2 Chest + Shoulders + Tris	2	49
+27	Total Synergistics	3	30
+28	The Challenge	3	30
+29	Incinerator	3	30
+30	Eccentric Upper	3	30
+31	Eccentric Lower	3	30
+32	The Warrior	3	30
+33	Agility X	3	30
+34	Triometrics	3	30
+35	Decelerator	3	30
+36	CVX	3	30
+37	MMX	3	30
+38	Accelerator	3	30
+39	X3 Yoga	3	30
+40	Pilates X	3	30
+41	Isometrix	3	30
+42	Dynamix	3	30
+43	Complex Upper	3	30
+44	Complex Lower	3	30
+45	X3 Ab Ripper	3	15
+46	Sculpt A	4	28
+47	Sweat A	4	25
+48	Ab Ripper A	4	8
+49	Sculpt B	4	31
+50	Sweat B	4	32
+51	Ab Ripper B	4	14
+52	Sculpt C	4	42
+53	Sweat C	4	36
+54	Ab Ripper C	4	15
+55	Saturday Special	4	25
+56	Interval X	5	42
+57	Kenpo X	5	42
+58	Upper Body Plus	5	41
+59	Total Body Plus	5	46
+60	Abs/Core Plus	5	20
+61	Build Legs	6	38
+62	Build Chest/Tris	6	48
+63	Build Back/Bis	6	50
+64	Build Shoulders	6	38
+65	Bulk Legs	6	41
+66	Bulk Arms	6	35
+67	Bulk Chest	6	30
+68	Bulk Back	6	29
+69	Bulk Shoulders	6	35
+70	Beast Abs	6	10
+71	Beast Cardio	6	38
+72	Beast Total Body	6	38
+73	Dig Deeper & Fit Test	8	30
+74	Plyometric Cardio Circuit	8	42
+75	Cardio Power & Resistance	8	40
+76	Cardio Recovery	8	33
+77	Pure Cardio & Cardio Abs	8	55
+78	Max Interval Circuit	8	56
+79	Max Interval Plyo	8	55
+80	Max Cardio Conditioning & Cardio Abs	8	65
+81	Max Recovery	8	47
+82	Fast & Furious	8	10
+83	Speed & Agility	9	45
+84	Vertical Plyo	9	40
+85	Relief	9	25
+86	Strength	9	50
+87	Game Day	9	60
+88	Overtime	9	15
+89	Back to Core	9	45
+90	Sports Performance Assessment	9	25
+91	X Trainer	11	50
+92	Upper Elite	11	60
+93	Ab Shredder	11	21
+94	Power Legs	11	50
+95	Back & 6 Pack	11	39
+96	Championship + Fit Test	11	56
+97	Off Day Stretch	11	31
+98	Agility Tutorial	11	24
+99	Pure Contact	11	22
+100	Cold Start	7	10
+101	Cardio 1	7	22
+102	Cardio 2	7	22
+103	Cardio 3	7	22
+104	Core 1	7	10
+105	Core 2	7	12
+106	Resistance 1	7	22
+107	Resistance 2	7	22
+108	Resistance 3	7	22
+109	Battle Buddy	7	22
+110	Cardio (Alpha)	10	25
+111	Speed 1.0 (Alpha)	10	25
+112	Total Body Circuit (Alpha)	10	25
+113	Ab Intervals (Alpha)	10	25
+114	Lower Focus (Alpha)	10	25
+115	Core Cardio (Beta)	10	25
+116	Speed 2.0 (Beta)	10	25
+117	Rip't Circuit (Beta)	10	25
+118	Dynamic Core (Beta)	10	25
+119	Upper Focus (Beta)	10	25
+120	Rip't Up (Gamma)	10	25
+121	Extreme Circuit (Gamma)	10	25
+122	The Pyramid (Gamma)	10	25
+123	Speed 3.0	10	25
+124	Core Speed	10	25
+125	Buns & Guns	12	32
+126	Strength & Force	12	54
+127	Plyo	12	52
+128	Cross Core Combat	12	46
+129	Competition Core	12	48
+130	Yoga	12	52
+131	Sprawl & Brawl	12	47
+132	Muay Thai	12	41
+133	Ripped Conditioning	12	42
+134	Ultimate Abs	12	16
+136	Legs & Back XT	12	41
+135	Cardio XT	12	47
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 44, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 1, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 192, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 11, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 20, true);
+
+
+--
+-- Name: workouts_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_category_id_seq', 10, true);
+
+
+--
+-- Name: workouts_category_workouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_category_workouts_id_seq', 159, true);
+
+
+--
+-- Name: workouts_musclegroup_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_musclegroup_id_seq', 1, true);
+
+
+--
+-- Name: workouts_musclegroup_workouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_musclegroup_workouts_id_seq', 18, true);
+
+
+--
+-- Name: workouts_program_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_program_id_seq', 12, true);
+
+
+--
+-- Name: workouts_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_type_id_seq', 3, true);
+
+
+--
+-- Name: workouts_type_workouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_type_workouts_id_seq', 3, true);
+
+
+--
+-- Name: workouts_workout_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taprete
+--
+
+SELECT pg_catalog.setval('public.workouts_workout_id_seq', 136, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: workouts_category workouts_category_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_category
+    ADD CONSTRAINT workouts_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workouts_category_workouts workouts_category_workouts_category_id_workout_id_c8e198c3_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_category_workouts
+    ADD CONSTRAINT workouts_category_workouts_category_id_workout_id_c8e198c3_uniq UNIQUE (category_id, workout_id);
+
+
+--
+-- Name: workouts_category_workouts workouts_category_workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_category_workouts
+    ADD CONSTRAINT workouts_category_workouts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workouts_musclegroup workouts_musclegroup_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_musclegroup
+    ADD CONSTRAINT workouts_musclegroup_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workouts_musclegroup_workouts workouts_musclegroup_wor_musclegroup_id_workout_i_9abfca32_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_musclegroup_workouts
+    ADD CONSTRAINT workouts_musclegroup_wor_musclegroup_id_workout_i_9abfca32_uniq UNIQUE (musclegroup_id, workout_id);
+
+
+--
+-- Name: workouts_musclegroup_workouts workouts_musclegroup_workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_musclegroup_workouts
+    ADD CONSTRAINT workouts_musclegroup_workouts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workouts_program workouts_program_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_program
+    ADD CONSTRAINT workouts_program_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workouts_type workouts_type_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_type
+    ADD CONSTRAINT workouts_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workouts_type_workouts workouts_type_workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_type_workouts
+    ADD CONSTRAINT workouts_type_workouts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workouts_type_workouts workouts_type_workouts_type_id_workout_id_a46db6a5_uniq; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_type_workouts
+    ADD CONSTRAINT workouts_type_workouts_type_id_workout_id_a46db6a5_uniq UNIQUE (type_id, workout_id);
+
+
+--
+-- Name: workouts_workout workouts_workout_pkey; Type: CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_workout
+    ADD CONSTRAINT workouts_workout_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: workouts_category_workouts_category_id_15dea193; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX workouts_category_workouts_category_id_15dea193 ON public.workouts_category_workouts USING btree (category_id);
+
+
+--
+-- Name: workouts_category_workouts_workout_id_8a9088f4; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX workouts_category_workouts_workout_id_8a9088f4 ON public.workouts_category_workouts USING btree (workout_id);
+
+
+--
+-- Name: workouts_musclegroup_workouts_musclegroup_id_2ed6ed1e; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX workouts_musclegroup_workouts_musclegroup_id_2ed6ed1e ON public.workouts_musclegroup_workouts USING btree (musclegroup_id);
+
+
+--
+-- Name: workouts_musclegroup_workouts_workout_id_6d25cc54; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX workouts_musclegroup_workouts_workout_id_6d25cc54 ON public.workouts_musclegroup_workouts USING btree (workout_id);
+
+
+--
+-- Name: workouts_type_workouts_type_id_339a72d1; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX workouts_type_workouts_type_id_339a72d1 ON public.workouts_type_workouts USING btree (type_id);
+
+
+--
+-- Name: workouts_type_workouts_workout_id_4cfd1182; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX workouts_type_workouts_workout_id_4cfd1182 ON public.workouts_type_workouts USING btree (workout_id);
+
+
+--
+-- Name: workouts_workout_program_id_34e85986; Type: INDEX; Schema: public; Owner: taprete
+--
+
+CREATE INDEX workouts_workout_program_id_34e85986 ON public.workouts_workout USING btree (program_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workouts_category_workouts workouts_category_wo_category_id_15dea193_fk_workouts_; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_category_workouts
+    ADD CONSTRAINT workouts_category_wo_category_id_15dea193_fk_workouts_ FOREIGN KEY (category_id) REFERENCES public.workouts_category(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workouts_category_workouts workouts_category_wo_workout_id_8a9088f4_fk_workouts_; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_category_workouts
+    ADD CONSTRAINT workouts_category_wo_workout_id_8a9088f4_fk_workouts_ FOREIGN KEY (workout_id) REFERENCES public.workouts_workout(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workouts_musclegroup_workouts workouts_musclegroup_musclegroup_id_2ed6ed1e_fk_workouts_; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_musclegroup_workouts
+    ADD CONSTRAINT workouts_musclegroup_musclegroup_id_2ed6ed1e_fk_workouts_ FOREIGN KEY (musclegroup_id) REFERENCES public.workouts_musclegroup(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workouts_musclegroup_workouts workouts_musclegroup_workout_id_6d25cc54_fk_workouts_; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_musclegroup_workouts
+    ADD CONSTRAINT workouts_musclegroup_workout_id_6d25cc54_fk_workouts_ FOREIGN KEY (workout_id) REFERENCES public.workouts_workout(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workouts_type_workouts workouts_type_workou_workout_id_4cfd1182_fk_workouts_; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_type_workouts
+    ADD CONSTRAINT workouts_type_workou_workout_id_4cfd1182_fk_workouts_ FOREIGN KEY (workout_id) REFERENCES public.workouts_workout(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workouts_type_workouts workouts_type_workouts_type_id_339a72d1_fk_workouts_type_id; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_type_workouts
+    ADD CONSTRAINT workouts_type_workouts_type_id_339a72d1_fk_workouts_type_id FOREIGN KEY (type_id) REFERENCES public.workouts_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workouts_workout workouts_workout_program_id_34e85986_fk_workouts_program_id; Type: FK CONSTRAINT; Schema: public; Owner: taprete
+--
+
+ALTER TABLE ONLY public.workouts_workout
+    ADD CONSTRAINT workouts_workout_program_id_34e85986_fk_workouts_program_id FOREIGN KEY (program_id) REFERENCES public.workouts_program(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
