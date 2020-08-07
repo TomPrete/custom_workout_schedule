@@ -11,7 +11,8 @@
     <li class="list-group-item">Time: <b>{{ workout.time }} minutes</b></li>
     <li class="list-group-item"> Categories:
       {% for category in workout.category.all %}
-      <span class="badge bg-info m-1 p-2"><a class='text-decoration-none text-white' href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span>
+      <span class="badge bg-info m-1 p-2"><a class='text-decoration-none text-white'
+          href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span>
       {% endfor %}
     </li>
   </ul>
@@ -34,7 +35,8 @@
             <li class="list-group-item">Time: {{ workout.time }} minutes</li>
             <li class="list-group-item"> Categories:
               {% for category in workout.category.all %}
-              <span class="badge bg-info m-1 p-2"><a class='text-decoration-none text-white' href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span>
+              <span class="badge bg-info m-1 p-2"><a class='text-decoration-none text-white'
+                  href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span>
               {% endfor %}
             </li>
           </ul>
@@ -43,4 +45,6 @@
       {% endfor %}
       {% endif %}
     </div>
-    {% endblock %}
+  </div>
+</div>
+{% endblock %}

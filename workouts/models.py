@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxLengthValidator
 
 class Program(models.Model):
     program = models.CharField(max_length=50)
@@ -34,3 +35,16 @@ class MuscleGroup(models.Model):
 
     def __str__(self):
         return f"{self.group}"
+
+class Schedule(models.Model):
+    count = models.IntegerField(default=1)
+
+class ScheduleDetail(models.Model):
+    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE, related_name='schedule_detail')
+    week = models.IntegerField()
+    day = models.CharField(max_length=6)
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name='schedule_workouts', null=True, blank=True)
+
+class Message(models.Model):
+    email = models.EmailField(max_length=100)
+    message = models.TextField(validators=[MaxLengthValidator(1000)])

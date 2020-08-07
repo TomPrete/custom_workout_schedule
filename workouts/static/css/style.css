@@ -2,6 +2,18 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+#background-image {
+  background-image: url('../img/background_photo.jpg');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#create-workout {
+  background-color: black;
+}
+
 .workout-links {
   text-decoration: none;
   color: black;
@@ -19,4 +31,8 @@ a {
 #category-header {
   font-size: 30px;
   font-weight: bold;
+}
+
+footer {
+  background-color: grey;
 }

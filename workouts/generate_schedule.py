@@ -3,7 +3,7 @@ from django.db.models import Q
 from .program_config import schedule
 import random
 
-class Schedule:
+class CreateSchedule:
   def __init__(self, program_workouts, days, ab_workout=False):
     self.workouts = program_workouts
     self.days = days

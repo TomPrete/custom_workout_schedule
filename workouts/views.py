@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Program, Workout, Category, Type, MuscleGroup
-from .generate_schedule import Schedule
+from .models import Program, Workout, Category, Type, MuscleGroup, Schedule, ScheduleDetail
+from .forms import MessageForm
+from .generate_schedule import CreateSchedule
 from collections import Counter
 import csv
 from ast import literal_eval
+import os
+my_path = os.path.abspath(os.path.dirname(__file__))
+path = os.path.join(my_path, "../custom_workout_schedule.csv")
 
 def main_app(request):
   programs = Program.objects.all().order_by('id')
@@ -22,9 +26,9 @@ def main_app(request):
     # else:
     #   ab_workout = False
     program_workouts = _get_program_workouts(programs_selected)
-    final_schedule = Schedule(program_workouts, days, ab_workout).assign_week_to_schedule()
-    _save_workout_to_csv(final_schedule)
-    return render(request, 'workouts/home.html', {'programs': programs, 'week': week, 'schedule': final_schedule})
+    final_schedule = CreateSchedule(program_workouts, days, ab_workout).assign_week_to_schedule()
+    new_schedule = _save_workout_schedule_to_database(final_schedule)
+    return render(request, 'workouts/home.html', {'programs': programs, 'week': week, 'schedule': final_schedule, 'schedule_id': new_schedule.id})
   return render(request, 'workouts/home.html', {'programs': programs, 'week': week})
 
 def _save_workout_to_csv(schedule):
@@ -46,16 +50,6 @@ def _save_workout_to_csv(schedule):
           'categories': categories
         })
 
-def download_workout_csv(request):
-  response = HttpResponse(content_type='text/csv')
-  response['Content-Disposition'] = 'attachment; filename="../custom_workout_schedule.csv"'
-  return response
-
-def _get_program_workouts(programs):
-  workouts = Program.objects.get(program=programs[0]).workouts.all()
-  for program in programs[1:]:
-    workouts = workouts | Program.objects.get(program=program).workouts.all()
-  return workouts
 
 def all_programs(request):
   all_programs = Program.objects.all().order_by('program')
@@ -99,6 +93,14 @@ def category_detail(request, category_id):
 
 
 def about(request):
+  if request.method == "POST":
+    form = MessageForm(request.POST)
+    if form.is_valid():
+      form.save(commit=True)
+      return render(request, 'workouts/about.html', {'message': "Thank you for your message! I'll review shortly."})
+    else:
+      return render(request, 'workouts/about.html', {'message': "There was an error submitting your message."})
+
   return render(request, 'workouts/about.html', {})
 
 def affiliate_page(request):
@@ -126,3 +128,52 @@ def _find_related_workouts(workout):
           related_workouts.append(related_workout)
   return related_workouts
 
+# Save workout to Database when some generates it
+def _save_workout_schedule_to_database(final_schedule):
+  new_schedule = Schedule.objects.create()
+  days = {
+    'one': 1,
+    'two': 2,
+    'three': 3,
+    'four': 4,
+    'five': 5,
+    'six': 6,
+    'seven': 7,
+  }
+  for index, week in enumerate(final_schedule):
+    for day in week:
+      if week[day] == None:
+        workout = None
+      else:
+        workout = Workout.objects.get(name=week[day])
+      schedule_detail = ScheduleDetail.objects.create(
+        schedule=new_schedule,
+        week=index+1,
+        day=days[day],
+        workout=workout
+        )
+  return new_schedule
+
+# Download WORKOUT to CSV
+def _download_workout_csv(request, schedule_id):
+  schedule_detail = ScheduleDetail.objects.filter(schedule=schedule_id).order_by('week', 'day')
+  response = HttpResponse(content_type='text/csv')
+  response['Content-Disposition'] = 'attachment; filename="custom_workout_schedule.csv"'
+  writer = csv.writer(response)
+  writer.writerow(['week', 'day', 'workout', 'minutes', 'program'])
+  for detail in schedule_detail:
+    if detail.workout == None:
+      time = 0
+      program = None
+    else:
+      time = detail.workout.time
+      program = detail.workout.program
+    writer.writerow([detail.week, f"Day {detail.day}", detail.workout, time, program])
+  ScheduleDetail.objects.filter(schedule=schedule_id).delete()
+  return response
+
+def _get_program_workouts(programs):
+  workouts = Program.objects.get(program=programs[0]).workouts.all()
+  for program in programs[1:]:
+    workouts = workouts | Program.objects.get(program=program).workouts.all()
+  return workouts
