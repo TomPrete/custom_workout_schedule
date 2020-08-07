@@ -26,6 +26,25 @@
         </div>
       </div>
     </div>
+    <!-- <div class='m-3'>
+      <p>Step 2: Do you want to include an Ab Workout?</p>
+    </div>
+    <div class="list-group m-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-2 ">
+            <label class="list-group-item ">
+              <input class="form-check-input mr-1" name='ab-workout' type="radio" value='yes' checked required>
+              Yes
+            </label>
+            <label class="list-group-item ">
+              <input class="form-check-input mr-1" name='ab-workout' type="radio" value='no' required>
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+    </div> -->
     <div class='m-3'>
       <p>Step 2: Select how many days you want to workout per week.</p>
     </div>
@@ -54,12 +73,12 @@
   {% if schedule %}
     <div class="alert alert-success mx-5" role="alert">
       View your custom workout schedule below!
-      <a href="{% url 'save_workout_to_csv' schedule%}" class="btn btn-primary">Download CSV</a>
+      <a class="nav-link " aria-current="page" href="{% url 'download_workout_csv' %}">Download</a>
     </div>
     {% for week in schedule %}
     <div class="card shadow mx-5 mb-1">
       <div class="card-header">
-        <h3>Week {{ forloop.counter }}</h3>
+        <h1><span class="badge bg-success">Week {{ forloop.counter }}</span></h1>
       </div>
       <table class="table">
         <thead>
@@ -75,7 +94,7 @@
           {% for day, value in week.items %}
           <tr>
             <th scope="row">Day {{ day|title }}</th>
-            <td>{{ value }}</td>
+            <th>{{ value }}</th>
             <td>{{ value.time }}</td>
             <td>
               {% for category in value.category.all %}

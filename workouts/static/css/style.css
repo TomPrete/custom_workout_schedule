@@ -1,6 +1,11 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .workout-links {
   text-decoration: none;
-  color: black
+  color: black;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .badge-links {
@@ -12,5 +17,6 @@ a {
 }
 
 #category-header {
-  font-size: 22px;
+  font-size: 30px;
+  font-weight: bold;
 }

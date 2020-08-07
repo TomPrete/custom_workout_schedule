@@ -4,10 +4,12 @@ from .program_config import schedule
 import random
 
 class Schedule:
-  def __init__(self, program_workouts, days):
+  def __init__(self, program_workouts, days, ab_workout=False):
     self.workouts = program_workouts
     self.days = days
+    self.ab_workout = ab_workout
     self.schedule = []
+    self.ab_schedule = []
 
 
   # Assign a workout for each day of week

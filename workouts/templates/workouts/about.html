@@ -1,0 +1,20 @@
+{% extends 'workouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-body">
+      <h5 class="card-title" id='about'>Hi Everyone!</h5>
+      <hr>
+      <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+      <b class="card-text">Here's a quick TLDR of why I built this application:</b>
+      <ul>
+        <li class="card-text">I wanted some variety in my workouts instead of doing the same workouts over and over.</li>
+        <li class="card-text">I wanted a central repository of workout programs and corresponding workouts with some data about each workout (category, time, etc.) </li>
+        <li class="card-text">I thought this information would be useful to other people like me.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

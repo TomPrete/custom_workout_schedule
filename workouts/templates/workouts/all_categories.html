@@ -1,0 +1,54 @@
+{% extends 'workouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+  <div class="accordion" id="accordionExample">
+    {% for category in all_categories %}
+    <div class="card shadow">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#category{{ category.category.id }}" aria-expanded="true" aria-controls="category{{ category.category.id }}">
+            <b>{{ category.category.category_name|title }}</b>
+            {% if category.total_workouts > 1 %}
+              <span class="badge bg-secondary">{{ category.total_workouts }} workouts</span>
+            {% else %}
+              <span class="badge bg-secondary">{{ category.total_workouts }} workout</span>
+            {% endif %}
+          </button>
+        </h2>
+      </div>
+      <div id="category{{ category.category.id }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Minutes</th>
+              <th scope="col">Program</th>
+              <th scope="col">Categories</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for workout in category.workouts %}
+              <tr class="align-middle">
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <th ><a class='workout-links' href="{% url 'workout_detail' workout.id %}">{{ workout.name }}</a></th>
+                  <th class='mb-3'>{{ workout.time }}</th>
+                  <th class='mb-3'>{{ workout.program }}</th>
+                  <th class='mb-3'>
+                    {% for category in workout.category.all %}
+                      <span class="badge bg-info m-1 p-1"><a class='text-decoration-none text-white' href="{% url 'category_detail' category.id %}">{{ category }}</a></span> <br>
+                    {% endfor %}
+                  </th>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

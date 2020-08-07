@@ -1,61 +1,61 @@
 week,day,workout,program,minutes,categories
-1,one,"Chest, Shoulders & Triceps in P90X",P90X,56,
-1,two,Total Synergistics in P90X3,P90X3,30,
-1,three,Back & Biceps in P90X,P90X,51,
-1,four,Pilates X in P90X3,P90X3,30,
-1,five,Triometrics in P90X3,P90X3,30,
-2,one,Shoulders & Arms in P90X,P90X,60,
-2,two,Base + Back in P90X2,P90X2,56,
-2,three,X2 Shoulders + Arms in P90X2,P90X2,53,
-2,four,Dynamix in P90X3,P90X3,30,
-2,five,X2 Core in P90X2,P90X2,57,
-3,one,Legs & Back in P90X,P90X,59,
-3,two,CVX in P90X3,P90X3,30,
-3,three,"Chest, Shoulders & Triceps in P90X",P90X,56,
-3,four,X2 Yoga in P90X2,P90X2,68,
-3,five,Legs & Back in P90X,P90X,59,
-4,one,The Challenge in P90X3,P90X3,30,
-4,two,Accelerator in P90X3,P90X3,30,
-4,three,Chest & Back in P90X,P90X,53,
-4,four,Dynamix in P90X3,P90X3,30,
-4,five,The Warrior in P90X3,P90X3,30,
-5,one,Chest & Back in P90X,P90X,53,
-5,two,Plyometrics in P90X,P90X,58,
-5,three,X2 Shoulders + Arms in P90X2,P90X2,53,
-5,four,X3 Yoga in P90X3,P90X3,30,
-5,five,Base + Back in P90X2,P90X2,56,
-6,one,The Challenge in P90X3,P90X3,30,
-6,two,Plyocide in P90X2,P90X2,57,
-6,three,Eccentric Upper in P90X3,P90X3,30,
-6,four,Yoga X in P90X,P90X,92,
-6,five,X2 Balance + Power in P90X2,P90X2,63,
-7,one,"Chest, Shoulders & Triceps in P90X",P90X,56,
-7,two,Triometrics in P90X3,P90X3,30,
-7,three,The Challenge in P90X3,P90X3,30,
-7,four,Pilates X in P90X3,P90X3,30,
-7,five,X2 Core in P90X2,P90X2,57,
-8,one,Chest & Back in P90X,P90X,53,
-8,two,Kenpo X in P90X,P90X,59,
-8,three,Incinerator in P90X3,P90X3,30,
-8,four,Dynamix in P90X3,P90X3,30,
-8,five,Legs & Back in P90X,P90X,59,
-9,one,Base + Back in P90X2,P90X2,56,
-9,two,Base + Back in P90X2,P90X2,56,
-9,three,V Sculpt in P90X2,P90X2,54,
-9,four,Isometrix in P90X3,P90X3,30,
-9,five,Legs & Back in P90X,P90X,59,
-10,one,Chest + Back + Balance in P90X2,P90X2,60,
-10,two,MMX in P90X3,P90X3,30,
-10,three,Incinerator in P90X3,P90X3,30,
-10,four,Dynamix in P90X3,P90X3,30,
-10,five,Total Synergistics in P90X3,P90X3,30,
-11,one,Eccentric Upper in P90X3,P90X3,30,
-11,two,Agility X in P90X3,P90X3,30,
-11,three,P.A.P. Upper in P90X2,P90X2,54,
-11,four,X3 Yoga in P90X3,P90X3,30,
-11,five,X2 Core in P90X2,P90X2,57,
-12,one,Shoulders & Arms in P90X,P90X,60,
-12,two,Agility X in P90X3,P90X3,30,
-12,three,"Chest, Shoulders & Triceps in P90X",P90X,56,
-12,four,Pilates X in P90X3,P90X3,30,
-12,five,X2 Core in P90X2,P90X2,57,
+1,one,V Sculpt,P90X2,54,upper body
+1,two,P.A.P. Lower,P90X2,63,lower body
+1,three,V Sculpt,P90X2,54,upper body
+1,four,X2 Yoga,P90X2,68,yoga
+1,five,Core Synergistics,P90X,57,total body
+2,one,V Sculpt,P90X2,54,upper body
+2,two,Eccentric Lower,P90X3,30,lower body
+2,three,The Challenge,P90X3,30,upper body
+2,four,Dynamix,P90X3,30,dynamic stretching
+2,five,Core Synergistics,P90X,57,total body
+3,one,Incinerator,P90X3,30,upper body
+3,two,Agility X,P90X3,30,plyo
+3,three,X2 Shoulders + Arms,P90X2,53,upper body
+3,four,Pilates X,P90X3,30,"abs/core,dynamic stretching"
+3,five,Complex Lower,P90X3,30,lower body
+4,one,P.A.P. Upper,P90X2,54,upper body
+4,two,Base + Back,P90X2,56,"upper body,lower body"
+4,three,"Chest, Shoulders & Triceps",P90X,56,upper body
+4,four,X2 Yoga,P90X2,68,yoga
+4,five,Complex Lower,P90X3,30,lower body
+5,one,X2 Shoulders + Arms,P90X2,53,upper body
+5,two,Plyocide,P90X2,57,plyo
+5,three,Incinerator,P90X3,30,upper body
+5,four,Pilates X,P90X3,30,"abs/core,dynamic stretching"
+5,five,X2 Total Body,P90X2,64,total body
+6,one,The Challenge,P90X3,30,upper body
+6,two,MMX,P90X3,30,cardio
+6,three,Eccentric Upper,P90X3,30,upper body
+6,four,Yoga X,P90X,92,yoga
+6,five,The Warrior,P90X3,30,"total body,cardio"
+7,one,V Sculpt,P90X2,54,upper body
+7,two,Total Synergistics,P90X3,30,"total body,cardio"
+7,three,Back & Biceps,P90X,51,upper body
+7,four,Dynamix,P90X3,30,dynamic stretching
+7,five,Complex Lower,P90X3,30,lower body
+8,one,Base + Back,P90X2,56,"upper body,lower body"
+8,two,Eccentric Lower,P90X3,30,lower body
+8,three,X2 Chest + Shoulders + Tris,P90X2,49,upper body
+8,four,Pilates X,P90X3,30,"abs/core,dynamic stretching"
+8,five,Complex Lower,P90X3,30,lower body
+9,one,Chest & Back,P90X,53,upper body
+9,two,Plyocide,P90X2,57,plyo
+9,three,Complex Upper,P90X3,30,upper body
+9,four,Pilates X,P90X3,30,"abs/core,dynamic stretching"
+9,five,Triometrics,P90X3,30,"lower body,plyo"
+10,one,Legs & Back,P90X,59,"upper body,upper body"
+10,two,Triometrics,P90X3,30,"lower body,plyo"
+10,three,"Chest, Shoulders & Triceps",P90X,56,upper body
+10,four,Dynamix,P90X3,30,dynamic stretching
+10,five,Base + Back,P90X2,56,"upper body,lower body"
+11,one,Complex Upper,P90X3,30,upper body
+11,two,MMX,P90X3,30,cardio
+11,three,X2 Shoulders + Arms,P90X2,53,upper body
+11,four,Dynamix,P90X3,30,dynamic stretching
+11,five,Legs & Back,P90X,59,"upper body,upper body"
+12,one,Incinerator,P90X3,30,upper body
+12,two,Plyometrics,P90X,58,plyo
+12,three,Chest & Back,P90X,53,upper body
+12,four,Dynamix,P90X3,30,dynamic stretching
+12,five,Decelerator,P90X3,30,"total body,cardio"
