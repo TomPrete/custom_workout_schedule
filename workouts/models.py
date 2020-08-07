@@ -13,7 +13,7 @@ class Workout(models.Model):
     time = models.IntegerField()
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} in {self.program}"
 
 class Category(models.Model):
     category_name = models.CharField(max_length=50)
