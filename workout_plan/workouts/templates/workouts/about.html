@@ -1,0 +1,49 @@
+{% extends 'workouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-body">
+      <h5 class="card-title" id='about'>Hi Everyone!</h5>
+      <hr>
+      <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+      <b class="card-text">Here's a quick TLDR of why I built this application:</b>
+      <ul>
+        <li class="card-text">I wanted some variety in my workouts instead of doing the same workouts over and over.</li>
+        <li class="card-text">I wanted a central repository of workout programs and corresponding workouts with some data about each workout (category, time, etc.) </li>
+        <li class="card-text">I thought this information would be useful to other people like me.</li>
+      </ul>
+      <p>I'm still working out some small bugs with the algorithm and would like to include Ab Ripper in the schedule. Submit a message of some other feature requests you would want to see implemented!</p>
+      <p>This application is still in beta.</p>
+    </div>
+  </div>
+  {% if message %}
+  <div class="alert alert-success mt-5" role="alert">
+    {{ message }}
+  </div>
+  {% else %}
+  <form method='POST'>
+    {% csrf_token %}
+    <div class="card shadow my-3">
+      <div class="card-body">
+        <h5 class="card-title" id='about'>Leave a note, feature request, report a bug, or whatever.</h5>
+        <hr>
+        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name='email' placeholder="ruthie.cohen@monks.com" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea height='100' type="text" class="form-control" id="message" name='message' placeholder="Rawr Rawr Rawr. No one understands you, she bear." required></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

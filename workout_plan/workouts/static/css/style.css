@@ -1,0 +1,38 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#background-image {
+  background-image: url('../img/background_photo.jpg');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#create-workout {
+  background-color: black;
+}
+
+.workout-links {
+  text-decoration: none;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.badge-links {
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none !important
+}
+
+#category-header {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+footer {
+  background-color: grey;
+}

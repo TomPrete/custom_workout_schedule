@@ -1,0 +1,48 @@
+{% extends 'workouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+  <div class="accordion" id="accordionExample">
+    {% for program in program_workouts %}
+    <div class="card shadow">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#program{{ program.program.id }}" aria-expanded="true" aria-controls="program{{ program.program.id }}">
+            <b>{{ program.program.program }}</b>  <span class="badge bg-secondary">{{ program.total_workouts }} workouts</span>
+          </button>
+        </h2>
+      </div>
+      <div id="program{{ program.program.id }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Minutes</th>
+              <th scope="col">Categories</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for workout in program.workouts %}
+              <tr class="align-middle">
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <th ><a class='workout-links' href="{% url 'workout_detail' workout.id %}">{{ workout.name }}</a></th>
+                  <th class='mb-3'>{{ workout.time }}</th>
+                  <th class='mb-3'>
+                    {% for category in workout.category.all %}
+                      <span class="badge bg-info m-1 p-1"><a class='text-decoration-none text-white' href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span> <br>
+                    {% endfor %}
+                  </th>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+

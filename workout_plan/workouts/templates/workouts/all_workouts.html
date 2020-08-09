@@ -1,0 +1,37 @@
+{% extends 'workouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-striped table-hover shadow border mt-3">
+        <thead class='rounded'>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Workout</th>
+            <th scope="col">Program</th>
+            <th scope="col">Time</th>
+            <th scope="col">Categories</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for workout in all_workouts %}
+            <tr class="align-middle">
+              <th scope="row">{{ forloop.counter }}</th>
+              <td><a class='workout-links' href="{% url 'workout_detail' workout.id %}">{{ workout.name }}</a></td>
+              <td>{{ workout.program }}</td>
+              <td>{{ workout.time }}</td>
+              <td>
+                {% for category in workout.category.all %}
+                  <span class="badge bg-info m-1 p-1"><a class='text-decoration-none text-white' href="{% url 'category_detail' category.id %}">{{ category.category_name|title }}</a></span> <br>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
